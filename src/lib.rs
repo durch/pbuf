@@ -7,8 +7,8 @@ use std::io::Cursor;
 
 pub fn read_pbuf<T>(reader: &mut Box<BufRead>) -> Vec<T>
   where T: MessageStatic {
-  let mut event: T;
-  let mut events: Vec<T> = Vec::new();
+  let mut msg: T;
+  let mut msgs: Vec<T> = Vec::new();
   let mut head = vec![0; 2];
 
   loop {
@@ -22,13 +22,13 @@ pub fn read_pbuf<T>(reader: &mut Box<BufRead>) -> Vec<T>
       Ok(n) => n,
       Err(e) => panic!("{:?}", e)
     };
-    event = match parse_from_bytes::<T>(&mut proto) {
+    msg = match parse_from_bytes::<T>(&mut proto) {
               Ok(n) => n,
               Err(e) => panic!("{:?}", e)
             };
-    events.push(event);
+    msgs.push(msg);
   }
-  events
+  msgs
 }
 
 fn header(sz: &Vec<u8>) -> usize {
@@ -39,9 +39,9 @@ fn header(sz: &Vec<u8>) -> usize {
   }
 }
 
-pub fn write_pbuf<T>(event: &T, writer: &mut Box<Write>) 
+pub fn write_pbuf<T>(msg: &T, writer: &mut Box<Write>)
   where T: Message {
-  let bts = Message::write_to_bytes(event).unwrap();
+  let bts = Message::write_to_bytes(msg).unwrap();
   let l = bts.len();
   match writer.write_u16::<LittleEndian>(l as u16) {
     Ok(n) => n,
