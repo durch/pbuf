@@ -13,8 +13,10 @@ use std::io::prelude::*;
 use std::io::{BufReader, self};
 use std::fs::File;
 
-mod msg
-use msg::Msg
+mod msg;
+use msg::Msg;
+
+use pbuf::read_pbuf;
 
 let mut reader = Box::new(BufReader::new(io::stdin()));
 // To read from file 
@@ -33,8 +35,10 @@ use std::io::prelude::*;
 use std::io::{BufWriter, self};
 use std::fs::File;
 
-mod msg
-use msg::Msg
+mod msg;
+use msg::Msg;
+
+use pbuf::write_pbuf;
 
 let mut writer = Box::new(BufWriter::new(io::stdout()));
 // To write to file 
