@@ -3,6 +3,8 @@
 *.so
 *.rlib
 *.dll
+src/event.rs
+src/session.rs
 
 # Executables
 *.exe
