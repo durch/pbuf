@@ -1,7 +1,7 @@
 ##### Dev branch containes better code ATM.
 
 # pbuf
-Rust pbuf, std/file reader/writer
+Reads/Writes to anything that implements Read/Write...
 
 Examples assume `Msg` is your protobuf and msg.rs is where it lives, see [rust-protobuf](https://github.com/stepancheg/rust-protobuf) on how to generate `.rs` from `.proto` files.
 
