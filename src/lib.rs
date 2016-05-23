@@ -39,7 +39,7 @@ fn header(sz: &Vec<u8>) -> usize {
   }
 }
 
-pub fn write_pbuf<M, W>(msg: &M, writer: &mut W)
+pub fn write_pbuf<M, W>(msg: &M, writer: &mut W) -> Option<usize>
   where M: Message, W: Write {
   let bts = Message::write_to_bytes(msg).unwrap();
   let l = bts.len();
@@ -51,4 +51,5 @@ pub fn write_pbuf<M, W>(msg: &M, writer: &mut W)
     Ok(n) => assert_eq!(l, n),
     Err(e) => panic!("{:?}", e)
   }
+  Some(l)
 }
