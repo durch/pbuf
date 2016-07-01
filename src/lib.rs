@@ -5,10 +5,10 @@ use protobuf::{MessageStatic, Message, parse_from_bytes};
 use byteorder::{ReadBytesExt, LittleEndian, WriteBytesExt};
 use std::io::Cursor;
 
-pub fn read_pbuf<T>(reader: &mut Box<BufRead>) -> Vec<T>
-  where T: MessageStatic {
-  let mut msg: T;
-  let mut msgs: Vec<T> = Vec::new();
+pub fn read_pbuf<M, R>(reader: &mut R) -> Vec<M>
+  where M: MessageStatic, R: Read {
+  let mut msg: M;
+  let mut msgs: Vec<M> = Vec::new();
   let mut head = vec![0; 2];
 
   loop {
@@ -22,7 +22,7 @@ pub fn read_pbuf<T>(reader: &mut Box<BufRead>) -> Vec<T>
       Ok(n) => n,
       Err(e) => panic!("{:?}", e)
     };
-    msg = match parse_from_bytes::<T>(&mut proto) {
+    msg = match parse_from_bytes::<M>(&mut proto) {
               Ok(n) => n,
               Err(e) => panic!("{:?}", e)
             };
@@ -39,8 +39,8 @@ fn header(sz: &Vec<u8>) -> usize {
   }
 }
 
-pub fn write_pbuf<T>(msg: &T, writer: &mut Box<Write>)
-  where T: Message {
+pub fn write_pbuf<M, W>(msg: &M, writer: &mut W) -> Option<usize>
+  where M: Message, W: Write {
   let bts = Message::write_to_bytes(msg).unwrap();
   let l = bts.len();
   match writer.write_u16::<LittleEndian>(l as u16) {
@@ -51,4 +51,5 @@ pub fn write_pbuf<T>(msg: &T, writer: &mut Box<Write>)
     Ok(n) => assert_eq!(l, n),
     Err(e) => panic!("{:?}", e)
   }
+  Some(l)
 }
