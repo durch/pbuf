@@ -8,7 +8,7 @@ Examples assume `Msg` is your protobuf and msg.rs is where it lives, see [rust-p
 pbuf = "0.3.2"
 ```
 
-### Reading example
+### Read example
 
 ```
 extern crate pbuf;
@@ -31,7 +31,7 @@ let mut reader = Box::new(BufReader::new(io::stdin()));
 let mut msgs: Vec<Msg> = read_pbuf(&mut reader);
 ```
 
-### Writing example
+### Write example
 ```
 extern crate pbuf;
 extern crate protobuf;
