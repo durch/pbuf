@@ -3,6 +3,11 @@ Reads/Writes to anything that implements Read/Write to/from protobuf...
 
 Examples assume `Msg` is your protobuf and msg.rs is where it lives, see [rust-protobuf](https://github.com/stepancheg/rust-protobuf) on how to generate `.rs` from `.proto` files.
 
+### Add to Cargo.toml
+```
+pbuf = "0.3.2"
+```
+
 ### Reading example
 
 ```
