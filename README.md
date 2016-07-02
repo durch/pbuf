@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/durch/pbuf.svg?branch=master)](https://travis-ci.org/durch/pbuf)
+
 # pbuf
 Reads/Writes to anything that implements Read/Write to/from protobuf...
 
