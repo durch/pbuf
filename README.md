@@ -1,5 +1,7 @@
+[![](https://camo.githubusercontent.com/2fee3780a8605b6fc92a43dab8c7b759a274a6cf/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f72757374632d737461626c652d627269676874677265656e2e737667)
 [![Build Status](https://travis-ci.org/durch/pbuf.svg?branch=master)](https://travis-ci.org/durch/pbuf)
 [![](http://meritbadge.herokuapp.com/pbuf)](https://crates.io/crates/pbuf)
+
 # pbuf
 Reads/Writes to anything that implements Read/Write to/from protobuf...
 
