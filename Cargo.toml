@@ -7,7 +7,6 @@ repository = "https://github.com/durch/pbuf"
 readme = "README.md"
 keywords = ["Google", "protobuf", "read", "write"]
 license = "MIT"
-license-file = "LICENSE.md"
 
 [dependencies]
 protobuf="1.0.22"
