@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/durch/pbuf.svg?branch=master)](https://travis-ci.org/durch/pbuf)
-
+[![](http://meritbadge.herokuapp.com/pbuf)](https://crates.io/crates/pbuf)
 # pbuf
 Reads/Writes to anything that implements Read/Write to/from protobuf...
 
