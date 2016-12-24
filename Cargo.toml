@@ -1,6 +1,6 @@
 [package]
 name = "pbuf"
-version = "0.3.3"
+version = "0.3.31"
 authors = ["Drazen Urch <github@drazenur.ch>"]
 description = "Read/Write to/from anything that implements Read/Write to/from protobuf."
 repository = "https://github.com/durch/pbuf"
@@ -8,7 +8,7 @@ readme = "README.md"
 keywords = ["Google", "protobuf", "read", "write"]
 license = "MIT"
 license-file = "LICENSE.md"
-documentation = "https://durch.github.io/rust-pbuf/"
+documentation = "https://durch.github.io/pbuf/"
 
 [dependencies]
 protobuf="1.0.22"
