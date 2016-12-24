@@ -3,7 +3,7 @@
 [![](http://meritbadge.herokuapp.com/pbuf)](https://crates.io/crates/pbuf)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/durch/pbuf/blob/master/LICENSE.md)
 
-# pbuf
+# pbuf [[docs](https://durch.github.io/pbuf/)]
 Reads/Writes to anything that implements Read/Write to/from protobuf...
 
 Examples assume `Msg` is your protobuf and msg.rs is where it lives, see [rust-protobuf](https://github.com/stepancheg/rust-protobuf) on how to generate `.rs` from `.proto` files.
