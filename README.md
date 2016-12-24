@@ -10,7 +10,7 @@ Examples assume `Msg` is your protobuf and msg.rs is where it lives, see [rust-p
 
 ### Add to Cargo.toml
 ```
-pbuf = "0.3.2"
+pbuf = "^0.3"
 ```
 
 ### Read example
