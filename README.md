@@ -2,6 +2,8 @@
 [![Build Status](https://travis-ci.org/durch/pbuf.svg?branch=master)](https://travis-ci.org/durch/pbuf)
 [![](http://meritbadge.herokuapp.com/pbuf)](https://crates.io/crates/pbuf)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/durch/pbuf/blob/master/LICENSE.md)
+[![Join the chat at https://gitter.im/durch/pbuf](https://badges.gitter.im/durch/rust-s3.svg)](https://gitter.im/durch/pbuf?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 # pbuf [[docs](https://durch.github.io/pbuf/)]
 Reads/Writes to anything that implements Read/Write to/from protobuf...
