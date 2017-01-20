@@ -17,7 +17,7 @@ pbuf = "^0.3"
 
 ### Read example
 
-```
+```rust
 extern crate pbuf;
 extern crate protobuf;
 
@@ -39,7 +39,7 @@ let mut msgs: Vec<Msg> = read_pbuf(&mut reader);
 ```
 
 ### Write example
-```
+```rust
 extern crate pbuf;
 extern crate protobuf;
 
