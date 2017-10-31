@@ -5,51 +5,45 @@ use protobuf::{MessageStatic, Message, parse_from_bytes};
 use byteorder::{ReadBytesExt, LittleEndian, WriteBytesExt};
 use std::io::Cursor;
 
-pub fn read_pbuf<M, R>(reader: &mut R) -> Vec<M>
+pub mod error;
+use error::PBErr;
+
+pub fn read_many<M, R>(reader: &mut R) -> Result<Vec<M>, PBErr>
   where M: MessageStatic, R: Read {
   let mut msg: M;
   let mut msgs: Vec<M> = Vec::new();
   let mut head = vec![0; 2];
 
-  loop {
-    match reader.read_exact(&mut head) {
-      Ok(n) => n,
-      Err(_) => break
-    };
-    let h = header(&head);
+  while let Ok(_) = reader.read_exact(&mut head) {
+    let h = header(&head)?;
     let mut proto = vec![0; h];
-    match reader.read_exact(&mut proto) {
-      Ok(n) => n,
-      Err(e) => panic!("{:?}", e)
-    };
-    msg = match parse_from_bytes::<M>(&mut proto) {
-              Ok(n) => n,
-              Err(e) => panic!("{:?}", e)
-            };
+    reader.read_exact(&mut proto)?;
+    msg = parse_from_bytes::<M>(&proto)?;
     msgs.push(msg);
   }
-  msgs
+  Ok(msgs)
 }
 
-fn header(sz: &Vec<u8>) -> usize {
-  let mut rdr = Cursor::new(sz);
-  match rdr.read_i16::<LittleEndian>() {
-    Ok(x) => x as usize,
-    Err(e) => panic!("Something wicked this way comes: {}", e)
-  }
+pub fn read_one<M, R>(reader: &mut R) -> Result<M, PBErr>
+  where M: MessageStatic, R: Read {
+    let mut head = vec![0; 2];
+
+    reader.read_exact(&mut head)?;
+    let h = header(&head)?;
+    let mut proto = vec![0; h];
+    reader.read_exact(&mut proto)?;
+    Ok(parse_from_bytes::<M>(&proto)?)
 }
 
-pub fn write_pbuf<M, W>(msg: &M, writer: &mut W) -> Option<usize>
+fn header(sz: &[u8]) -> Result<usize, PBErr> {
+  Ok(Cursor::new(sz).read_i16::<LittleEndian>()? as usize)
+}
+
+pub fn write<M, W>(msg: &M, writer: &mut W) -> Result<usize, PBErr>
   where M: Message, W: Write {
-  let bts = Message::write_to_bytes(msg).unwrap();
+  let bts = Message::write_to_bytes(msg)?;
   let l = bts.len();
-  match writer.write_u16::<LittleEndian>(l as u16) {
-    Ok(n) => n,
-    Err(e) => panic!("{:?}", e)
-  };
-  match writer.write(&bts[..]) {
-    Ok(n) => assert_eq!(l, n),
-    Err(e) => panic!("{:?}", e)
-  }
-  Some(l)
+  writer.write_u16::<LittleEndian>(l as u16)?;
+  writer.write_all(&bts[..])?;
+  Ok(l)
 }
